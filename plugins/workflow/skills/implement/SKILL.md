@@ -12,6 +12,7 @@ description: Use this skill when an approved task document already exists and th
 - Do not broaden scope without user approval.
 - Do not rely on provider-specific model switch commands.
 - `implement auto` is the only automation entry point.
+- Update `TASKS.md` at both transitions (Planned → In Progress on start, In Progress → Testing on finish) and re-read the tracker before handoff to confirm the row moved. A stale tracker blocks downstream and headless sessions.
 
 Runtime adapters may expose this stage as a slash command, menu action, or natural-language skill invocation. The portable stage name is `implement`.
 
@@ -31,13 +32,14 @@ If a user asks for provider-specific model names, treat them as adapter-level pr
 4. Read `docs/task/{ID}-{task-name}.md`.
 5. Verify the task has been reviewed and approved for implementation. If approval is unclear, stop and ask.
 6. Read only files listed in the task document unless a missing dependency blocks implementation.
-7. Move the task to `In Progress` in `TASKS.md`.
+7. Move the task to `In Progress` in `TASKS.md`, removing the row from `Planned`.
 8. Apply the implementation steps.
 9. Run relevant verification commands from the task document when safe.
 10. Append `Implementation Notes` to the task document.
-11. Move the task to `Testing` in `TASKS.md`.
-12. In manual mode, stop and hand off to `simplify`.
-13. In auto mode, continue through the portable automation chain.
+11. Move the task to `Testing` in `TASKS.md`, removing the row from `In Progress`.
+12. Re-read `TASKS.md` and verify the task row is in `Testing` and absent from `Planned` and `In Progress`. If the row is not in the expected section, the move was missed — perform the edit now before handoff.
+13. In manual mode, stop and hand off to `simplify`.
+14. In auto mode, continue through the portable automation chain.
 
 ## Reading Rules
 

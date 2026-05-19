@@ -11,6 +11,7 @@ description: Use this skill after implementation passes the quality gate and the
 - Use the best available project verification path.
 - Do not require one specific browser automation tool in core workflow.
 - Always write one final report to `docs/testing/`.
+- When tests pass and the user approves, update `TASKS.md` to `Approved` and re-read the tracker to confirm the row moved. A stale tracker blocks downstream and headless sessions.
 
 Runtime adapters may expose this stage as a slash command, menu action, or natural-language skill invocation. The portable stage name is `test`.
 
@@ -25,6 +26,7 @@ Runtime adapters may expose this stage as a slash command, menu action, or natur
 7. Use browser automation or manual checks only when required by the task.
 8. Write `docs/testing/{ID}-{task-name}.md` using `docs/templates/test-report.md`.
 9. Move the task to `Approved` only after tests pass and the user approves, or leave it in `Testing` if fixes are needed.
+10. If the move was made, re-read `TASKS.md` and verify the task row is in `Approved` and absent from `Testing`. If the row is not in the expected section, the move was missed — perform the edit now before handoff.
 
 ## Verification Priority
 

@@ -11,6 +11,7 @@ description: Use this skill when the user wants to plan a new feature, bug fix, 
 - Do not implement code.
 - Do not start automation from planning.
 - Stop after updating `TASKS.md` and tell the user the task is ready for review.
+- After adding the row to `Planned`, re-read `TASKS.md` to confirm the row is present before handoff.
 
 Runtime adapters may expose this stage as a slash command, menu action, or natural-language skill invocation. The portable stage name is `task`.
 

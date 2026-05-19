@@ -11,6 +11,7 @@ description: Use this skill after implementation and before testing to run a qua
 - Do not add new product scope.
 - Block major deviations before testing.
 - Write durable findings to the task document.
+- If the task doc has an `Implementation Notes` section but `TASKS.md` still shows the row in `Planned` or `In Progress`, reconcile the row to `Testing` before continuing — implement ran but missed its tracker update. If `Implementation Notes` is absent, do not reconcile; implement genuinely did not run and the user should be told.
 
 Runtime adapters may expose this stage as a slash command, menu action, or natural-language skill invocation. The portable stage name is `simplify`.
 

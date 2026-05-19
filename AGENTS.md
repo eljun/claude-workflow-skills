@@ -46,6 +46,14 @@ Implementation can begin only after task review is complete and the task documen
 
 Test reports live in `docs/testing/`.
 
+## TASKS.md Tracker Discipline
+
+`TASKS.md` is shared state across stages, sessions, and headless runs. A stale row blocks downstream automation that gates on task status. Every stage that changes status must:
+
+1. Move the task row out of its current section and into the next section in the same edit.
+2. Re-read `TASKS.md` after the edit and confirm the row is in the new section and absent from prior sections. Retry the edit if the move did not land.
+3. Never silently leave the row in an earlier section because intermediate stages were skipped. `ship` self-heals from any earlier section and discloses skipped stages in the PR body and handoff.
+
 ## Project Memory
 
 `LEARNINGS.md` is the mutable project knowledge base. If it exists, workflow stages should read it before making decisions that could repeat known mistakes.

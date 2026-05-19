@@ -11,6 +11,7 @@ description: Use this skill after verification passes and the user approves the 
 - Base documentation on the task document, test report, and actual changed files.
 - Update `LEARNINGS.md` for reusable lessons.
 - Update `AGENTS.md` only for stable project-level instructions.
+- Ensure the task is in `Approved` in `TASKS.md` before handoff. If a prior stage missed the move, reconcile the row to `Approved` here and re-read the tracker to confirm.
 
 Runtime adapters may expose this stage as a slash command, menu action, or natural-language skill invocation. The portable stage name is `document`.
 
@@ -25,7 +26,8 @@ Runtime adapters may expose this stage as a slash command, menu action, or natur
 7. Write a retrospective in `docs/learnings/{ID}-{task-name}.md`.
 8. Append reusable lessons to `LEARNINGS.md` without duplicating existing entries.
 9. Update `AGENTS.md` only if the task established durable project-level behavior.
-10. Move the task to `Approved` in `TASKS.md`.
+10. Move the task to `Approved` in `TASKS.md` (no-op if `test` already moved it; reconcile from any earlier section if not).
+11. Re-read `TASKS.md` and verify the task row is in `Approved` and absent from `Planned`, `In Progress`, or `Testing`. If the row is not in the expected section, the move was missed — perform the edit now before handoff.
 
 ## Documentation Triggers
 

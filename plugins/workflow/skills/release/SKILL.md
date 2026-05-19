@@ -11,6 +11,7 @@ description: Use this skill when one or more ready-to-ship tasks have been merge
 - Keep changelog entries user-focused.
 - Do not include unmerged pull requests.
 - Do not rewrite existing tags without explicit user approval.
+- After moving released items to `Shipped`, re-read `TASKS.md` to confirm each row left `Ready To Ship`. A stale tracker blocks downstream and headless sessions.
 
 Runtime adapters may expose this stage as a slash command, menu action, or natural-language skill invocation. The portable stage name is `release`.
 
@@ -34,7 +35,8 @@ Supported version inputs:
 6. Commit changelog changes if the repository workflow expects release commits.
 7. Create a git tag when appropriate.
 8. Create release notes using the available repository hosting tool when appropriate.
-9. Move released items to `Shipped` in `TASKS.md`.
+9. Move released items to `Shipped` in `TASKS.md`, removing each row from `Ready To Ship`.
+10. Re-read `TASKS.md` and verify the released task rows are in `Shipped` and absent from `Ready To Ship`. If any row is not in the expected section, the move was missed — perform the edit now before handoff.
 
 ## Version Calculation
 

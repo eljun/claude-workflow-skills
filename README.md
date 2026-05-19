@@ -96,6 +96,8 @@ task -> implement -> simplify -> test -> document -> ship -> release
 
 Planning always stops for review. The `task` stage creates or updates the task document and `TASKS.md`, then waits for user approval.
 
+Stages between `implement` and `ship` are skippable. `ship` self-heals from any earlier section in `TASKS.md`, advances the row to `Ready To Ship`, and discloses which stages were skipped in the PR body and handoff — based on durable artifacts in the task doc and `docs/testing/`, not on the (possibly stale) tracker section. This keeps headless sessions unblocked when a small task does not need the full chain.
+
 Automation starts only from implementation:
 
 ```text

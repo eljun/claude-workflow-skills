@@ -1,6 +1,6 @@
 {
   "name": "workflow",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Agent-neutral, memory-first workflow skills: task, implement, simplify, test, document, ship, release.",
   "skills": [
     "./skills/task",
