@@ -49,6 +49,8 @@ Apply where relevant:
 - errors are handled intentionally
 - no secrets, credentials, or debug logging in production paths
 - tests that assert on old behaviour or wording are updated deliberately, with a comment saying why, never just deleted
+- new or changed tests check **behaviour or output** where they can; a test that only asserts source text or structure is flagged as weak evidence
+- every acceptance criterion in the task doc has a check that could fail; flag any that don't
 - project conventions from `AGENTS.md`, `LEARNINGS.md`, and the task doc are followed
 
 ## Deviation Classification

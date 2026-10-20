@@ -35,6 +35,7 @@ Follow this precedence order:
 - Preserve human review before implementation.
 - Separate skill installation from model or reasoning selection.
 - Use execution tiers in core workflow language: `fast`, `balanced`, and `deep`.
+- **Loops with real signals.** Every claim of success rests on a check that could have failed: acceptance criteria are runnable checks with expected results, a baseline is captured before changing anything, each step runs its narrowest check, retries must change something, and post-deploy checks are run before a task counts as shipped. Never report a result that wasn't observed.
 
 ## Task Document Rules
 

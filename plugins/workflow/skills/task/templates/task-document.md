@@ -73,19 +73,22 @@
 
 ## Acceptance Criteria
 
-Write criteria as observable behavior that can be verified by tests, commands, browser automation, API calls, or document inspection.
+Every criterion has a **check that could fail**: a command, query, API call or browser step, plus the result that means "done". No check means the criterion can't be claimed. If a criterion truly can't be automated, mark it `manual` and say why.
 
-### Happy Path
+| # | Criterion (Given / When / Then) | Check | Expected | When |
+|---|---------------------------------|-------|----------|------|
+| 1 | Given {state}, when {action}, then {observable result} | `{command / query / API call}` | `{value, count, status}` | pre-merge / post-deploy |
+| 2 | Error: given {condition}, when {action}, then {error or recovery} | `{check}` | `{expected}` | pre-merge |
+| 3 | Edge: {boundary case} | `{check}` | `{expected}` | pre-merge |
+| 4 | No regression: {behaviour that must not change} | `{check}` | `{same as baseline}` | pre-merge / post-deploy |
 
-- [ ] Given {state}, when {action}, then {observable result}
+### Baseline
 
-### Error States
+> Run the checks **before** changing anything and record the values here, so "after" is a comparison and not an assertion.
 
-- [ ] Given {condition}, when {action}, then {error or recovery behavior}
-
-### Edge Cases
-
-- [ ] {Boundary case}
+| # | Baseline value | Captured |
+|---|----------------|----------|
+| 1 | {value} | {date / commit} |
 
 ## Verification Approach
 

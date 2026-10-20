@@ -12,6 +12,8 @@ Lessons from running the workflow with several parallel agents on one integratio
 - **No-task-doc path (`simplify`):** small owner-requested changes get the same quality gate, recorded in the PR body.
 - **Live verification (`test`):** distinguishes "tests pass" from "the change is live", requires output-based evidence in the running system, and marks deploy-dependent checks as Deferred instead of PASS.
 
+- **Validation loops** ("never claim what you didn't observe"): acceptance criteria are now a table of **checks with expected results** (pre-merge or post-deploy), including at least one no-regression check; `implement` captures a **baseline** first, runs the narrowest check after each step, must change something between retries, and records failed attempts; `simplify` flags criteria with no failing check and tests that only assert source text; `test` compares against the baseline and grades each result's **evidence strength**; `ship` hands over the **post-deploy checks**; `release` keeps a task out of `Shipped` until they've been run, or the user waives them.
+
 ### Improvements
 
 - **Templates bundled with the skills:** `task-document.md` and `tasks-tracking.md` moved to `skills/task/templates/`, and `test-report.md` to `skills/test/templates/`. `npx skills add` copies sibling files (verified by installing into a throwaway project), so the templates now arrive in target projects; before, `task` pointed at a `docs/templates/` path that only existed in this repo. A project's own `docs/templates/` still takes precedence.

@@ -86,6 +86,10 @@ Use the commands that exist in the target project. If a command is unavailable, 
 
 - {Computed deploys (with already-live status if checkable), migrations, config; or "None: merge is enough"}
 
+## Post-Deploy Checks
+
+- {Each `post-deploy` acceptance check and `Deferred` test check: the exact command/query and the expected result, or "None"}
+
 ## Workflow References
 
 - Task: docs/task/{ID}-{task-name}.md
@@ -100,5 +104,6 @@ Ship preparation complete for task {ID}
 Task status: Ready To Ship (verified in TASKS.md)
 Skipped stages: {list or "None"}
 PR: {url}
-Next stage after merge: release
+Post-deploy checks pending: {count, listed in the PR, or "None"}
+Next stage after merge (and deploy): run the post-deploy checks, then release
 ```

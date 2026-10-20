@@ -62,6 +62,8 @@ The task document must include:
 - `Operator Steps` (or "None: merge is enough")
 - compatibility touchpoints for packaging, docs, adapters, or install surface when relevant
 
+**Acceptance criteria are checks, not prose.** Each one names the command, query, API call or browser step that verifies it, the expected result, and whether it runs pre-merge or post-deploy. Include at least one **no-regression** check for behaviour that must not change. A criterion with no check that could fail can't be claimed later; if it can't be automated, mark it `manual` and say why.
+
 When the task comes from a live investigation, include the evidence (the query, record IDs, counts, `file:line`) so the implementation agent can re-verify it instead of trusting prose.
 
 Embed concise code excerpts or notes in `Code Context`; do not paste entire unrelated files.

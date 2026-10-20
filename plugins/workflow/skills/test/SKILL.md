@@ -40,6 +40,13 @@ Use the narrowest reliable check first:
 
 If no viable verification path exists, write a BLOCKED report explaining what is missing.
 
+## Evidence Rules
+
+- **Run each criterion's check and compare it with the task doc's `Baseline`.** Record both values. A criterion passes only when its check ran and showed the expected result.
+- **Grade the oracle.** A check that asserts source text, file structure or a mock's call count shows the code has a shape, not that it behaves. Mark such results **weak evidence** and, where a behaviour or output check is possible, run that instead.
+- **No-regression checks are required**, not optional: re-run the behaviour the task says must not change.
+- **Never mark PASS from reasoning alone.** If a check couldn't run, the result is SKIPPED or BLOCKED, with the reason.
+
 ## Live Verification
 
 Passing tests show the code is right; they don't show the change is **live**. When the change ships through separately deployed parts (services, functions, workers, migrations):
