@@ -46,6 +46,12 @@ Implementation can begin only after task review is complete and the task documen
 
 Test reports live in `docs/testing/`.
 
+Templates are bundled with the skill that uses them (`plugins/workflow/skills/task/templates/`, `plugins/workflow/skills/test/templates/`), so they install with the skill. A project may override them with its own `docs/templates/`.
+
+Every task document records `Coordination` (other open tasks touching the same files), `Open Decisions` (`BLOCKING` decisions stop `implement`) and `Operator Steps` (what merging alone does not apply).
+
+**A claimed task's scope is frozen.** Once a task is `In Progress` or claimed (a worker branch or an open PR), do not change its scope in the doc: an agent that already read it won't see the edit. New findings go in a new task that references the original, and the user is told to message the working agent.
+
 ## TASKS.md Tracker Discipline
 
 `TASKS.md` is shared state across stages, sessions, and headless runs. A stale row blocks downstream automation that gates on task status. Every stage that changes status must:

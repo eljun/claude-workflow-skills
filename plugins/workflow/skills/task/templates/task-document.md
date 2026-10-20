@@ -118,6 +118,30 @@ Write criteria as observable behavior that can be verified by tests, commands, b
 - Required APIs: {None or list}
 - Blocked by: {None or task/reference}
 
+## Coordination
+
+> Other `Planned` / `In Progress` tasks that change the same files. Write "None found" if you checked and there are none.
+
+| Shared file | Other task | Rule |
+|-------------|------------|------|
+| `path/to/shared-file` | {ID} | {land after {ID} / same agent / no conflict, because …} |
+
+## Open Decisions
+
+> `BLOCKING` decisions stop `implement`. Write "None" if there are none.
+
+| # | Decision | Options | Status |
+|---|----------|---------|--------|
+| D1 | {What the user must decide} | A: … / B: … | BLOCKING / NON-BLOCKING (default: …) / ✅ Decided {date}: {choice} |
+
+## Operator Steps
+
+> What merging does **not** do by itself. Write "None: merge is enough" if that's the case.
+
+- **Migrations / schema:** {None or list, in apply order}
+- **Deploys:** {every affected deployable, including importers of changed shared modules, and how they were found}
+- **Config / secrets / data:** {None or list; mark anything that writes data as owner-run}
+
 ## Notes For Implementation Agent
 
 {Critical constraints, gotchas, and tier rationale.}
