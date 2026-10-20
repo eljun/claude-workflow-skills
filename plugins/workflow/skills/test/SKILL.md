@@ -24,7 +24,7 @@ Runtime adapters may expose this stage as a slash command, menu action, or natur
 5. Prefer existing project commands and CI-compatible checks.
 6. Run safe verification commands.
 7. Use browser automation or manual checks only when required by the task.
-8. Write `docs/testing/{ID}-{task-name}.md` using `docs/templates/test-report.md`.
+8. Write `docs/testing/{ID}-{task-name}.md` from the project's `docs/templates/test-report.md` if it exists, otherwise from `templates/test-report.md` bundled next to this file.
 9. Move the task to `Approved` only after tests pass and the user approves, or leave it in `Testing` if fixes are needed.
 10. If the move was made, re-read `TASKS.md` and verify the task row is in `Approved` and absent from `Testing`. If the row is not in the expected section, the move was missed — perform the edit now before handoff.
 
@@ -39,6 +39,20 @@ Use the narrowest reliable check first:
 5. Manual inspection only when automation is unavailable or not cost-effective.
 
 If no viable verification path exists, write a BLOCKED report explaining what is missing.
+
+## Evidence Rules
+
+- **Run each criterion's check and compare it with the task doc's `Baseline`.** Record both values. A criterion passes only when its check ran and showed the expected result.
+- **Grade the oracle.** A check that asserts source text, file structure or a mock's call count shows the code has a shape, not that it behaves. Mark such results **weak evidence** and, where a behaviour or output check is possible, run that instead.
+- **No-regression checks are required**, not optional: re-run the behaviour the task says must not change.
+- **Never mark PASS from reasoning alone.** If a check couldn't run, the result is SKIPPED or BLOCKED, with the reason.
+
+## Live Verification
+
+Passing tests show the code is right; they don't show the change is **live**. When the change ships through separately deployed parts (services, functions, workers, migrations):
+
+- Verify **output** in the running system (the rows, messages or records the change should produce), not liveness (status codes, "job succeeded", a deployed version number).
+- Name any check that needs a deploy or an owner action first as **Deferred**, with the exact step, instead of marking it PASS.
 
 ## Report Rules
 

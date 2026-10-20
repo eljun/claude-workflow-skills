@@ -8,6 +8,7 @@ description: Use this skill when one or more ready-to-ship tasks have been merge
 ## Invariants
 
 - Release only merged `Ready To Ship` tasks.
+- **Close the loop:** a task moves to `Shipped` only when its post-deploy checks (listed in the PR / test report) have been run against the live system and their results recorded in the test report, or when the user explicitly waives them for that task. Merged is not the same as working.
 - Keep changelog entries user-focused.
 - Do not include unmerged pull requests.
 - Do not rewrite existing tags without explicit user approval.
@@ -30,13 +31,14 @@ Supported version inputs:
 1. Read `AGENTS.md`.
 2. Read `TASKS.md` and find merged items in `Ready To Ship`.
 3. Read each task document for type, version impact, and summary.
-4. Determine the next version.
-5. Generate or update `docs/changelogs/CHANGELOG.md`.
-6. Commit changelog changes if the repository workflow expects release commits.
-7. Create a git tag when appropriate.
-8. Create release notes using the available repository hosting tool when appropriate.
-9. Move released items to `Shipped` in `TASKS.md`, removing each row from `Ready To Ship`.
-10. Re-read `TASKS.md` and verify the released task rows are in `Shipped` and absent from `Ready To Ship`. If any row is not in the expected section, the move was missed — perform the edit now before handoff.
+4. For each task, confirm its post-deploy checks were run and recorded (or waived by the user). Keep any task whose checks are still pending in `Ready To Ship`, and list it in the handoff with the pending checks.
+5. Determine the next version.
+6. Generate or update `docs/changelogs/CHANGELOG.md`.
+7. Commit changelog changes if the repository workflow expects release commits.
+8. Create a git tag when appropriate.
+9. Create release notes using the available repository hosting tool when appropriate.
+10. Move released items to `Shipped` in `TASKS.md`, removing each row from `Ready To Ship`.
+11. Re-read `TASKS.md` and verify the released task rows are in `Shipped` and absent from `Ready To Ship`. If any row is not in the expected section, the move was missed — perform the edit now before handoff.
 
 ## Version Calculation
 
@@ -74,5 +76,6 @@ Highest impact wins when multiple tasks are released together.
 ```text
 Release prepared: v{version}
 Tasks shipped: {IDs}
+Held (post-deploy checks pending): {IDs or "None"}
 Changelog: docs/changelogs/CHANGELOG.md
 ```

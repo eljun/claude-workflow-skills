@@ -23,10 +23,11 @@ Runtime adapters may expose this stage as a slash command, menu action, or natur
 4. Pre-ship checks are still useful; missing artifacts do not block ship, only get disclosed.
 5. Run pre-ship checks documented by the project or task.
 6. Review changed files for unintended edits and secrets.
-7. Create or reuse an appropriate branch.
-8. Create a pull request with links to the task document, test report, and the `Skipped Stages` disclosure.
-9. Move the task to `Ready To Ship` in `TASKS.md`, removing the row from whichever prior section it currently sits in.
-10. Re-read `TASKS.md` and verify the task row is now under `Ready To Ship` and absent from prior sections. If the row is not in the expected section, the move was missed — perform the edit now before handoff.
+7. **Compute the operator steps from the diff** (see below). Don't copy them from the task doc.
+8. Create or reuse an appropriate branch.
+9. Create a pull request with links to the task document, test report, the `Skipped Stages` disclosure and the `Operator Steps`.
+10. Move the task to `Ready To Ship` in `TASKS.md`, removing the row from whichever prior section it currently sits in.
+11. Re-read `TASKS.md` and verify the task row is now under `Ready To Ship` and absent from prior sections. If the row is not in the expected section, the move was missed, so make the edit now before handoff.
 
 (This is a verification against the model forgetting the step, not against `Edit` failing. The check is cheap and catches the most common cause of stale trackers.)
 
@@ -42,6 +43,16 @@ Detect from durable artifacts, not from tracker section. The tracker may be stal
 | `document` | `docs/learnings/{ID}-{task-name}.md` exists, or feature/guide docs were updated for this task |
 
 A stage with no artifact is "skipped". List skipped stages in the PR body and handoff.
+
+## Operator Steps (computed)
+
+If merging doesn't by itself apply the change (separately deployed functions, services or workers; migrations; config), derive what must happen from the diff:
+
+- **Deploys:** for each deployable entry point, check whether the diff changes it **or any module it imports, transitively**. A change to a shared module reaches every deployable that imports it; list them all, not only the obvious one.
+- **Already live?** If the project lets you check deployed state read-only (deploy timestamps or versions vs the last commit that reaches each deployable), report each one as deployed or "needs deploy".
+- **Migrations / config / data:** list them in apply order. Mark data writes as owner-run when the project requires that.
+
+Put the result in the PR body. When nothing is needed, write "None: merge is enough".
 
 ## Pre-Ship Checks
 
@@ -71,6 +82,14 @@ Use the commands that exist in the target project. If a command is unavailable, 
 
 - {Comma-separated list, or "None"}
 
+## Operator Steps
+
+- {Computed deploys (with already-live status if checkable), migrations, config; or "None: merge is enough"}
+
+## Post-Deploy Checks
+
+- {Each `post-deploy` acceptance check and `Deferred` test check: the exact command/query and the expected result, or "None"}
+
 ## Workflow References
 
 - Task: docs/task/{ID}-{task-name}.md
@@ -85,5 +104,6 @@ Ship preparation complete for task {ID}
 Task status: Ready To Ship (verified in TASKS.md)
 Skipped stages: {list or "None"}
 PR: {url}
-Next stage after merge: release
+Post-deploy checks pending: {count, listed in the PR, or "None"}
+Next stage after merge (and deploy): run the post-deploy checks, then release
 ```

@@ -24,9 +24,15 @@
 
 ## Acceptance Criteria Results
 
-| # | Criterion | Status | Evidence |
-|---|-----------|--------|----------|
-| 1 | {Criterion from task doc} | PASS/FAIL | {Command output, observation, screenshot path, or notes} |
+| # | Criterion | Check run | Baseline | Result | Status | Evidence strength |
+|---|-----------|-----------|----------|--------|--------|-------------------|
+| 1 | {Criterion from task doc} | `{exact command / query}` | {before value} | {after value} | PASS / FAIL / SKIPPED / DEFERRED | behaviour / output / weak (source or structure only) |
+
+## Post-Deploy Checks
+
+| # | Check | Expected | Result | Run at |
+|---|-------|----------|--------|--------|
+| 1 | `{command / query against the live system}` | {expected} | {pending / value} | {date} |
 
 ## Functional Checks
 

@@ -35,6 +35,7 @@ Follow this precedence order:
 - Preserve human review before implementation.
 - Separate skill installation from model or reasoning selection.
 - Use execution tiers in core workflow language: `fast`, `balanced`, and `deep`.
+- **Loops with real signals.** Every claim of success rests on a check that could have failed: acceptance criteria are runnable checks with expected results, a baseline is captured before changing anything, each step runs its narrowest check, retries must change something, and post-deploy checks are run before a task counts as shipped. Never report a result that wasn't observed.
 
 ## Task Document Rules
 
@@ -45,6 +46,12 @@ The `task` stage creates or updates a task document, updates `TASKS.md`, and the
 Implementation can begin only after task review is complete and the task document has been approved by the user. `implement auto` is the only supported automation entry point, and it assumes an approved task document already exists.
 
 Test reports live in `docs/testing/`.
+
+Templates are bundled with the skill that uses them (`plugins/workflow/skills/task/templates/`, `plugins/workflow/skills/test/templates/`), so they install with the skill. A project may override them with its own `docs/templates/`.
+
+Every task document records `Coordination` (other open tasks touching the same files), `Open Decisions` (`BLOCKING` decisions stop `implement`) and `Operator Steps` (what merging alone does not apply).
+
+**A claimed task's scope is frozen.** Once a task is `In Progress` or claimed (a worker branch or an open PR), do not change its scope in the doc: an agent that already read it won't see the edit. New findings go in a new task that references the original, and the user is told to message the working agent.
 
 ## TASKS.md Tracker Discipline
 

@@ -73,19 +73,22 @@
 
 ## Acceptance Criteria
 
-Write criteria as observable behavior that can be verified by tests, commands, browser automation, API calls, or document inspection.
+Every criterion has a **check that could fail**: a command, query, API call or browser step, plus the result that means "done". No check means the criterion can't be claimed. If a criterion truly can't be automated, mark it `manual` and say why.
 
-### Happy Path
+| # | Criterion (Given / When / Then) | Check | Expected | When |
+|---|---------------------------------|-------|----------|------|
+| 1 | Given {state}, when {action}, then {observable result} | `{command / query / API call}` | `{value, count, status}` | pre-merge / post-deploy |
+| 2 | Error: given {condition}, when {action}, then {error or recovery} | `{check}` | `{expected}` | pre-merge |
+| 3 | Edge: {boundary case} | `{check}` | `{expected}` | pre-merge |
+| 4 | No regression: {behaviour that must not change} | `{check}` | `{same as baseline}` | pre-merge / post-deploy |
 
-- [ ] Given {state}, when {action}, then {observable result}
+### Baseline
 
-### Error States
+> Run the checks **before** changing anything and record the values here, so "after" is a comparison and not an assertion.
 
-- [ ] Given {condition}, when {action}, then {error or recovery behavior}
-
-### Edge Cases
-
-- [ ] {Boundary case}
+| # | Baseline value | Captured |
+|---|----------------|----------|
+| 1 | {value} | {date / commit} |
 
 ## Verification Approach
 
@@ -117,6 +120,30 @@ Write criteria as observable behavior that can be verified by tests, commands, b
 - Required packages: {None or list}
 - Required APIs: {None or list}
 - Blocked by: {None or task/reference}
+
+## Coordination
+
+> Other `Planned` / `In Progress` tasks that change the same files. Write "None found" if you checked and there are none.
+
+| Shared file | Other task | Rule |
+|-------------|------------|------|
+| `path/to/shared-file` | {ID} | {land after {ID} / same agent / no conflict, because …} |
+
+## Open Decisions
+
+> `BLOCKING` decisions stop `implement`. Write "None" if there are none.
+
+| # | Decision | Options | Status |
+|---|----------|---------|--------|
+| D1 | {What the user must decide} | A: … / B: … | BLOCKING / NON-BLOCKING (default: …) / ✅ Decided {date}: {choice} |
+
+## Operator Steps
+
+> What merging does **not** do by itself. Write "None: merge is enough" if that's the case.
+
+- **Migrations / schema:** {None or list, in apply order}
+- **Deploys:** {every affected deployable, including importers of changed shared modules, and how they were found}
+- **Config / secrets / data:** {None or list; mark anything that writes data as owner-run}
 
 ## Notes For Implementation Agent
 

@@ -27,6 +27,15 @@ Runtime adapters may expose this stage as a slash command, menu action, or natur
 8. Append `Quality Gate Notes` to the task document.
 9. Return PASS or FAIL.
 
+## No Task Document
+
+For a small change the user asked for directly, with no `docs/task/` doc (a quick fix or polish):
+
+- Review the diff (`git diff` against the base branch) against the user's request instead of a task doc.
+- Apply the same standards checklist and deviation levels. "Scope" is what the user asked for.
+- Record the result (`PASS`/`FAIL`, findings, deviations) in the **pull request body** or the commit message, not in a new task doc.
+- Don't create `TASKS.md` rows for it unless the project asks for that.
+
 ## Standards Checklist
 
 Apply where relevant:
@@ -39,6 +48,9 @@ Apply where relevant:
 - repeated logic is extracted when repetition creates maintenance risk
 - errors are handled intentionally
 - no secrets, credentials, or debug logging in production paths
+- tests that assert on old behaviour or wording are updated deliberately, with a comment saying why, never just deleted
+- new or changed tests check **behaviour or output** where they can; a test that only asserts source text or structure is flagged as weak evidence
+- every acceptance criterion in the task doc has a check that could fail; flag any that don't
 - project conventions from `AGENTS.md`, `LEARNINGS.md`, and the task doc are followed
 
 ## Deviation Classification

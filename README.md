@@ -86,6 +86,10 @@ Recommended tracked files:
 | `docs/task/` | Task documents |
 | `docs/testing/` | Test reports |
 
+Templates install with the skills: `task` bundles `templates/task-document.md` and `templates/tasks-tracking.md`, and `test` bundles `templates/test-report.md`. To customise them for a project, copy them to that project's `docs/templates/`, which takes precedence.
+
+Task documents carry three coordination sections: `Coordination` (other open tasks on the same files), `Open Decisions` (`BLOCKING` ones stop `implement`) and `Operator Steps` (deploys, migrations and config that merging doesn't apply; `ship` recomputes deploys from the diff, including importers of changed shared modules). Once a task is claimed, its scope is frozen; new findings become a new task.
+
 ## Workflow
 
 Manual flow:
